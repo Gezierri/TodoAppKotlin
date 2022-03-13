@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
@@ -30,30 +31,43 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Title"
-            android:maxLength="25"
             android:ellipsize="end"
-            android:textColor="@color/darkGray"
+            android:maxLength="25"
+            android:text="Title"
+            android:textColor="@color/dontkown"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tv_row_data"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/card_priority"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_row_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="20/10/2022 - 08:30"
+            android:textStyle="italic"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/card_priority"
+            app:layout_constraintEnd_toStartOf="@id/card_priority"
+            app:layout_constraintTop_toTopOf="@+id/card_priority" />
 
         <TextView
             android:id="@+id/tv_row_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:text="description"
+            android:text="descriptiodddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddn"
             android:textSize="16sp"
-            android:textStyle="bold"
+            android:textStyle="normal"
             android:maxLength="300"
+            android:textColor="@color/dontkown"
             android:maxLines="10"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/card_priority"
             app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="@+id/card_priority"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_row_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_row_title" />
 

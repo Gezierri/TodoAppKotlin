@@ -1,8 +1,6 @@
 package com.android.todoappkotlin.fragments.update
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -17,6 +15,12 @@ import com.android.todoappkotlin.data.model.ToDoData
 import com.android.todoappkotlin.data.viewmodel.SharedViewModel
 import com.android.todoappkotlin.data.viewmodel.ToDoViewModel
 import com.android.todoappkotlin.databinding.FragmentUpdateBinding
+import com.android.todoappkotlin.extensions.format
+import com.android.todoappkotlin.extensions.text
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
+import java.util.*
 
 
 class UpdateFragment : Fragment() {
@@ -36,11 +40,16 @@ class UpdateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setHasOptionsMenu(true)
         binding.edTitle.setText(args.currentItem.title)
         binding.etDescription.setText(args.currentItem.description)
+        binding.tieDate.setText(args.currentItem.date)
+        binding.tieHour.setText(args.currentItem.hour)
         binding.spinnerPriorities.setSelection(sharedViewModel.setPriority(args.currentItem.priority))
         binding.spinnerPriorities.onItemSelectedListener = sharedViewModel.listener
+
+        dataPicker()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -57,41 +66,74 @@ class UpdateFragment : Fragment() {
 
     private fun deleteData() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes"){_, _ ->
+        builder.setPositiveButton("Sim"){_, _ ->
             viewModel.delete(args.currentItem)
             Toast.makeText(
                 requireContext(),
-                "Successfully Removed: '${args.currentItem.title}'",
+                "Tarefa '${args.currentItem.title}' removida com sucesso!",
                 Toast.LENGTH_SHORT
             ).show()
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
         }
-        builder.setNegativeButton("No"){_, _ -> }
-        builder.setTitle("Delete '${args.currentItem.title}'")
-        builder.setMessage("Are you sure you want to remove '${args.currentItem.title}'?")
+        builder.setNegativeButton("Não"){_, _ -> }
+        builder.setTitle("Remover '${args.currentItem.title}'")
+        builder.setMessage("Deseja realmente remover '${args.currentItem.title}'?")
         builder.create().show()
     }
 
     private fun updateData() {
+
         val title = binding.edTitle.text.toString()
         val description = binding.etDescription.text.toString()
         val priority = binding.spinnerPriorities.selectedItem.toString()
-
-        val validation = sharedViewModel.verifyDataFormUser(title, description)
+        val date = binding.tilDate.text
+        val hour = binding.tilHour.text
+        val validation = sharedViewModel.verifyDataFormUser(title, description, date, hour)
 
         if (validation) {
             val updateData = ToDoData(
                 id = args.currentItem.id,
                 title = title,
                 description = description,
-                priority = sharedViewModel.parsePriority(priority)
+                priority = sharedViewModel.parsePriority(priority),
+                date = date,
+                hour = hour
             )
             viewModel.update(updateData)
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
-            Toast.makeText(requireContext(), "Successfully updated!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Tarefa alterada com sucesso!", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(requireContext(), "Please fill out all fields", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT)
                 .show()
+        }
+    }
+
+    private fun dataPicker() {
+        binding.tilDate.editText?.setOnClickListener {
+            val datePicker = MaterialDatePicker.Builder.datePicker().build()
+
+            datePicker.addOnPositiveButtonClickListener {
+                val timeZone = TimeZone.getDefault()
+                val offset = timeZone.getOffset(Date().time) * -1
+                binding.tilDate.text = Date(it + offset).format()
+            }
+            datePicker.show(parentFragmentManager, "")
+        }
+
+        binding.tilHour.editText?.setOnClickListener {
+            val timePicker = MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .build()
+
+            timePicker.addOnPositiveButtonClickListener {
+                val minute =
+                    if (timePicker.minute in 0..9) "0${timePicker.minute}" else timePicker.minute
+                val hour = if (timePicker.hour in 0..9) "0${timePicker.hour}" else timePicker.hour
+
+                binding.tilHour.text = "$hour:$minute"
+            }
+
+            timePicker.show(parentFragmentManager, null)
         }
     }
 }

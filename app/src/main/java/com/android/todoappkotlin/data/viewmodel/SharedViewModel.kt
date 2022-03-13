@@ -56,19 +56,19 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     }
 
-    fun verifyDataFormUser(title: String, description: String): Boolean {
-        return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(description))
+    fun verifyDataFormUser(title: String, description: String, date: String, hour: String): Boolean {
+        return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(description) || TextUtils.isEmpty(date) || TextUtils.isEmpty(hour))
     }
 
     fun parsePriority(priority: String): Priority {
         return when (priority) {
-            "High Priority" -> {
+            "Prioridade Alta" -> {
                 Priority.HIGH
             }
-            "Medium Priority" -> {
+            "Prioridade Média" -> {
                 Priority.MEDIUM
             }
-            "Low Priority" -> {
+            "Prioridade Baixa" -> {
                 Priority.LOW
             }
             else -> Priority.LOW

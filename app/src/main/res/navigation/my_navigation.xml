@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.android.todoappkotlin.fragments.list.ListFragment"
-        android:label="To Do List"
-        tools:layout="@layout/fragment_list" >
+        android:label="Tarefas"
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment"
@@ -29,20 +29,18 @@
     <fragment
         android:id="@+id/addFragment"
         android:name="com.android.todoappkotlin.fragments.add.AddFragment"
-        android:label="Add To Do"
-        tools:layout="@layout/fragment_add" >
+        android:label="Nova tarefa"
+        tools:layout="@layout/fragment_add">
         <action
             android:id="@+id/action_addFragment_to_listFragment"
-            app:destination="@id/listFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/from_right" />
+            app:destination="@id/listFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/updateFragment"
         android:name="com.android.todoappkotlin.fragments.update.UpdateFragment"
-        android:label="Update"
-        tools:layout="@layout/fragment_update" >
+        android:label="Alterar tarefa"
+        tools:layout="@layout/fragment_update">
         <action
             android:id="@+id/action_updateFragment_to_listFragment"
             app:destination="@id/listFragment"

@@ -13,5 +13,7 @@ data class ToDoData(
     val id: Int,
     val title: String,
     val priority: Priority,
-    val description: String
+    val description: String,
+    val date: String,
+    val hour: String
 ):Parcelable

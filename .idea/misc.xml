@@ -5,14 +5,18 @@
       <map>
         <entry key="app/src/main/res/drawable/custom_card.xml" value="0.231" />
         <entry key="app/src/main/res/drawable/custom_input.xml" value="0.2375" />
+        <entry key="app/src/main/res/drawable/ic_timer.xml" value="0.237" />
         <entry key="app/src/main/res/drawable/ic_warning.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21944444444444444" />
-        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/layout/add_layout.xml" value="0.26145833333333335" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_update.xml" value="0.2604166666666667" />
-        <entry key="app/src/main/res/layout/row_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_scrolling.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_update.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/row_layout.xml" value="0.33" />
         <entry key="app/src/main/res/menu/from_bottom.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_add.xml" value="0.12" />
+        <entry key="app/src/main/res/menu/menu_list.xml" value="0.13425925925925927" />
         <entry key="app/src/main/res/menu/menu_todo.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_update.xml" value="0.25" />
       </map>
